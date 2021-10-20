@@ -170,7 +170,7 @@ namespace Vosmerka
 
         private List<Tuple<string, float, float>> FilterByDiscountValuesList =
           new List<Tuple<string, float, float>>() {
-        Tuple.Create("Все записи", 0f, 10000f),
+        Tuple.Create("Все записи", 0f, 100000f),
         Tuple.Create("от 100 до 500", 0f, 500f),
         Tuple.Create("от 500 до 2000", 500f,2000f),
         Tuple.Create("от 2000 до 5000", 2000f, 10000f),

@@ -8,16 +8,18 @@
         Title="ProductWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="152"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Image 
         Margin="5"
         Source="./Logo/Logo.png" 
         VerticalAlignment="Top"/>
-        <StackPanel VerticalAlignment="Bottom">
 
-            <Label Content="Цена: "/>
+
+
+        <StackPanel VerticalAlignment="Bottom" Margin="0,0,0,5">
+           
             <RadioButton 
                 GroupName="Price"
                 Tag="1"
@@ -31,7 +33,6 @@
                 Content="по убыванию" 
                 Checked="RadioButton_Checked"
                 VerticalContentAlignment="Center"/>
-
             <Label Content="Фильтр по скидке: "
         Margin="10,0,0,0"
         VerticalAlignment="Center"/>
@@ -46,8 +47,8 @@
                     VerticalAlignment="Center"
                     KeyUp="TextBox_KeyUp" TextChanged="SearchFilterTextBox_TextChanged"/>
 
-
-            <Button Margin="5" x:Name="OrderProvid" Content="F9" Click="OrdProvidClick"></Button>
+            <Button Margin="5" x:Name="OrderProvid" Content="Материалы" Click="OrdProvidClick"></Button>
+            
             <Button Margin="5" x:Name="ExitBtn" Content="Выход" Click="ExitButtonClick"></Button>
         </StackPanel>
         <Image 
@@ -109,11 +110,7 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel
                             Orientation="Horizontal">
-                                    <TextBlock 
-                                Text=""/>
-
-                                    <TextBlock 
-                                Text="   "/>
+                         
                                     <TextBlock 
                                 Text="{Binding Title}"/>
                                 </StackPanel>
@@ -129,7 +126,7 @@
             Grid.Column="1"
             Grid.Row="2">
             <Label Content="{Binding FilteredProductCount}"/>
-            <Label Content=""/>
+            <Label Content="/"/>
             <Label Content="{Binding ProductCount}"/>
         </StackPanel>
     </Grid>
