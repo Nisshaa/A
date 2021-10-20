@@ -8,146 +8,129 @@
         Title="ProductWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition  Width = " 150 " />
-            <ColumnDefinition  Width = " * " />
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        <Image 
+        Margin="5"
+        Source="./Logo/Logo.png" 
+        VerticalAlignment="Top"/>
+        <StackPanel VerticalAlignment="Bottom">
+
+            <Label Content="Цена: "/>
+            <RadioButton 
+                GroupName="Price"
+                Tag="1"
+                Content="по возрастанию" 
+                IsChecked="True" 
+                Checked="RadioButton_Checked"
+                VerticalContentAlignment="Center"/>
+            <RadioButton 
+                GroupName="Price" 
+                Tag="2"
+                Content="по убыванию" 
+                Checked="RadioButton_Checked"
+                VerticalContentAlignment="Center"/>
+
+            <Label Content="Фильтр по скидке: "
+        Margin="10,0,0,0"
+        VerticalAlignment="Center"/>
+            <ComboBox
+    Name="DiscountFilterComboBox"
+    SelectedIndex="0"
+    SelectionChanged="DiscountFilterComboBox_SelectionChanged"
+    ItemsSource="{Binding FilterByDiscountNamesList}"/>
+            <Label Content="Поиск"/>
+            <TextBox
+                    x:Name="SearchFilterTextBox"
+                    VerticalAlignment="Center"
+                    KeyUp="TextBox_KeyUp" TextChanged="SearchFilterTextBox_TextChanged"/>
 
 
-
-
-        <Image Source="./logo/Восьмерка.PNG" Grid.Column="0" VerticalAlignment="Top"/>
-        <StackPanel Grid.Column="0" VerticalAlignment="Bottom">
-            <WrapPanel 
-    Orientation="Horizontal" 
-    ItemHeight="40">
-                <Button 
-        x:Name="AddButton" 
-        
-        Content="Добавить объект недвижимости"/>
-
-                <Label Content="Типы продкутов" VerticalAlignment="Center"/>
-                <ComboBox
-        Width="150"
-        x:Name="StreetFilter"
-        VerticalAlignment="Center"
-        SelectedIndex="0"
-        SelectionChanged="StreetFilter_SelectionChanged"
-        ItemsSource="{Binding StreetsList}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Title}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </WrapPanel>
-            <Button Content="f9"></Button>
-            <Button Content="Выход" Name="ExitButton" Click="ExitButton_Click"></Button>
+            <Button Margin="5" x:Name="OrderProvid" Content="F9" Click="OrdProvidClick"></Button>
+            <Button Margin="5" x:Name="ExitBtn" Content="Выход" Click="ExitButtonClick"></Button>
         </StackPanel>
-
-
-
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions >
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
-            <StackPanel 
-    Orientation="Horizontal" 
-    VerticalAlignment="Center"
-                Grid.Row="0">
-                <Label Content="Цена: "/>
-                <RadioButton 
-        GroupName="Price"
-        Tag="1"
-        Content="по возрастанию" 
-        IsChecked="True" 
-        Checked="RadioButton_Checked"
-        VerticalContentAlignment="Center"/>
-                <RadioButton 
-        GroupName="Price" 
-        Tag="2"
-        Content="по убыванию" 
-        Checked="RadioButton_Checked"
-        VerticalContentAlignment="Center"/>
-                <Label Content="искать" VerticalAlignment="Center"/>
-                <TextBox
-    Width="200"
-    VerticalAlignment="Center"
-    x:Name="SearchFilterTextBox" KeyUp="SearchFilter_KeyUp"/>
-            </StackPanel>
-
-
-
-
-            <ListView
-            Grid.Column="1"
+        <Image 
+        Margin="5"
+        Source="./Logo/Logo.png" 
+        VerticalAlignment="Top"/>
+        <ListView
             Grid.Row="1"
-                
-            ItemsSource="{Binding ProductList}"
-                
-            x:Name="ProductListView">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderThickness="1"
-                            BorderBrush="Black"
-                            CornerRadius="5">
-                            <Grid Margin="10" HorizontalAlignment="Stretch">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="64"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="100"/>
-                                </Grid.ColumnDefinitions>
-                                <Image
-                                    Grid.Column="0"
+            Grid.Column="1"
+            ItemsSource="{Binding ServiceList}"
+            x:Name="ProductListView" SelectionChanged="ProductListView_SelectionChanged">
+            <ListView.ItemContainerStyle>
+                <Style 
+                    TargetType="ListViewItem">
+
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding MinPrice}"
+                            Value="True">
+                            <Setter
+                                Property="Background"
+                                Value="Aqua"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                    <Setter 
+                        Property="HorizontalContentAlignment"
+                        Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border 
+                BorderThickness="1" 
+                BorderBrush="Black" 
+                CornerRadius="5">
+                        <Grid 
+                    Margin="10" 
+                    HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="64"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <Image
                         Width="64" 
                         Height="64"
-                        Source="{Binding Path=ImagePreviewService}" />
-                                <TextBlock Grid.Column="2"
-                                       HorizontalAlignment="Right"
-                                Text="{Binding MinCostForAgent}"/>
-                                <Grid Grid.Column="1" Margin="5">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="20"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
+                        Source="{Binding Path=ImagePreview}" />
+                            <TextBlock 
+                        Text="{Binding MinCostForAgent}" 
+                        Grid.Column="2" 
+                        HorizontalAlignment="Right" 
+                        Margin="10"/>
+                            <!-- для содержимого рисуем вложенную сетку -->
+                            <Grid Grid.Column="1" Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel
+                            Orientation="Horizontal">
+                                    <TextBlock 
+                                Text=""/>
 
-
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Title}"/>
-                                        <TextBlock Text=" | "/>
-                                        <TextBlock Text="{Binding ProductType.Title}"/>
-                                    </StackPanel>
-
-
-
-
-                                </Grid>
-
+                                    <TextBlock 
+                                Text="   "/>
+                                    <TextBlock 
+                                Text="{Binding Title}"/>
+                                </StackPanel>
                             </Grid>
-
-                        </Border>
-                    </DataTemplate>
-
-                </ListView.ItemTemplate>
-                <ListView.ItemContainerStyle>
-                    <Style 
-            TargetType="ListViewItem"
-                        >
-
-                        <Setter 
-                Property="HorizontalContentAlignment"
-                Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
-            <StackPanel Grid.Row="2" Orientation="Horizontal">
-                <TextBlock Text="{Binding SelectedRows,StringFormat=Выделено {0} из&#xA0;}"/>
-                <TextBlock Text="{Binding TotalRows}"/>
-            </StackPanel>
-        </Grid>
-
-
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel 
+            Orientation="Horizontal"
+            VerticalAlignment="Bottom"
+            Grid.Column="1"
+            Grid.Row="2">
+            <Label Content="{Binding FilteredProductCount}"/>
+            <Label Content=""/>
+            <Label Content="{Binding ProductCount}"/>
+        </StackPanel>
     </Grid>
 </Window>
